@@ -30,10 +30,9 @@ Resources:
     Type: AWS::Lambda::Function
     Properties:
       Code:
-        S3Bucket:
-          'Fn::ImportValue': !Sub '${CapitalizedProjectName}PipelineArtifactsBucket'
+        S3Bucket: lambdav3-artifact-bucket
         S3Key: !Ref DeploymentPackageKey
-      FunctionName: my-lambda-function
+      FunctionName: lambda-v3-fn
       Handler: main.handler
       Role: !GetAtt LambdaRunnerRole.Arn
       Runtime: python2.7

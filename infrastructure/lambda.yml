@@ -2,9 +2,9 @@ AWSTemplateFormatVersion: 2010-09-09
 Description: My Lambda function
 
 Parameters:
-  CapitalizedProjectName:
+  FunctionName:
     Type: String
-    Default: MyLambdaProject
+    Default: lambda-v3-fn
   DeploymentPackageKey:
     Type: String
     Description: An S3 object key pointing of a ZIP file, an archive of everything that is needed to run the Lambda function. It is the output of the Build stage of the pipeline.
@@ -32,10 +32,10 @@ Resources:
       Code:
         S3Bucket: lambdav3-artifact-bucket
         S3Key: !Ref DeploymentPackageKey
-      FunctionName: lambda-v3-fn
-      Handler: main.handler
+      FunctionName: !Ref FunctionName
+      Handler: index.handler
       Role: !GetAtt LambdaRunnerRole.Arn
-      Runtime: python2.7
+      Runtime:  nodejs12.x
 
 Outputs:
   LambdaFunction:
